@@ -203,8 +203,8 @@ class ZenroomSha256(BaseSha256):
     def sign(self, message, condition_script, private_keys):
         message = json.loads(message)
         data = {}
-        if 'data' in message['asset'].keys():
-            data['asset'] = message['asset']['data']
+        if len(message['assets']) > 0 and 'data' in message['assets'][0].keys():
+            data['asset'] = message['assets'][0]['data']
         if self.data is not None:
             data['output'] = self.data
 
@@ -293,8 +293,8 @@ class ZenroomSha256(BaseSha256):
             return False
         data = {}
         try:
-            if message['asset']['data']:
-                data['asset'] = message['asset']['data']
+            if len(message['assets']) > 0 and 'data' in message['assets'][0].keys():
+                data['asset'] = message['assets'][0]['data']
         except JSONDecodeError:
             pass
         if self.data is not None:
