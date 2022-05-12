@@ -168,9 +168,7 @@ def test_zenroom():
     # THIS FILLS THE METADATA WITH THE RESULT
     try:
         assert(not zenSha.validate(message=message))
-    except JSONDecodeError:
-        pass
-    except ValueError:
+    except:
         pass
 
     message = zenSha.sign(message, condition_script, alice)
